@@ -1,6 +1,6 @@
 # action.yaml
 name: 'Get LemonTreeAutomation'
-description: 'An Action to download LieberLieber LemonTree.Automation for Sparx Systems Enterprise Architect on a build runner!'
+description: 'This action downloads LieberLieber LemonTree.Automation for Sparx Systems Enterprise Architect on a build runner!'
 inputs:
   LemonTreePackageURL:
     description: 'the url for deployment'
