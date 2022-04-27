@@ -27,7 +27,7 @@ jobs:
       #Install LieberLieber LemonTree.Automation on the Action-Runner and prepare the license
       #the secrets.LTALICENSE contains the text from the License File provided
       - name: GetLTA
-        uses: LieberLieber/setup-LemonTree.Automation@v0.4
+        uses: LieberLieber/setup-LemonTree.Automation@v0.5
         id: GetLTA
         with:
           License: ${{secrets.LTALICENSE}}
