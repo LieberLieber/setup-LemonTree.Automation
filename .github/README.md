@@ -1,7 +1,7 @@
 Github Action to Deploy LemonTree.Automation
 ==================================
 This allows you to deploy LieberLieber LemonTree.Automation for Sparx Systems Enterprise Architect Models to your Github Actions in an easy way!<br />
-LemonTree.Automation is the commandline Version for CI/CD of our widely known LemonTree 3-way diff and merge tool!
+LemonTree.Automation is the commandline Version for CI/CD of our widely known LemonTree 3-way diff and merge tool!<br />
 Product Webpage: https://www.lieberlieber.com/lemontree/<br />
 To claim a trial or buy a license contact welcome@lieberlieber.com
 
