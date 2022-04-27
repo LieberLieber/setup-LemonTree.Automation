@@ -10,7 +10,8 @@ To claim a trial or buy a license contact welcome@lieberlieber.com
         uses: LieberLieber/setup-LemonTree.Automation@v0.6
         id: GetLTA
         with:
-          License: ${{secrets.LTALICENSE}}
+          License: ${{secrets.LTALICENSE}} 
+      #ExeLocation &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}"
       
       # first simple use of LemonTree.Automation
       - name: ConsistencyCheck
