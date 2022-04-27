@@ -1,7 +1,5 @@
 # action.yaml
 name: 'Get LemonTreeAutomation'
-author: Daniel Siegl
-labels: Enterprise Architect, Sysml, MBSE, Models, UML
 description: 'An Action to download LieberLieber LemonTree.Automation for Sparx Systems Enterprise Architect on a build runner!'
 inputs:
   LemonTreePackageURL:
