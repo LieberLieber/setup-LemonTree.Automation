@@ -5,11 +5,17 @@ LemonTree.Automation is the commandline Version for CI/CD of our widely known Le
 Product Webpage: https://www.lieberlieber.com/lemontree/<br />
 To claim a trial or buy a license contact welcome@lieberlieber.com
 
+      # download Lemontree.Automation on a runner and setup the license
       - name: GetLTA
         uses: LieberLieber/setup-LemonTree.Automation@v0.1
         id: GetLTA
         with:
           License: ${{secrets.LTALICENSE}}
+      
+      # first simple use of LemonTree.Automation
+      - name: ConsistencyCheck
+        run: |
+          &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
 
 Simple Example Workflow: https://github.com/LieberLieber/setup-LemonTree.Automation/actions/workflows/TestGetLemonTreeAutomationAction.yml<br />
 Many more Workflow Examples: https://github.com/LieberLieber/LemonTree.Automation.Workflows/<br />
