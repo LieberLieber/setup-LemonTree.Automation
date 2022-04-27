@@ -15,7 +15,7 @@ To claim a trial or buy a license contact welcome@lieberlieber.com
       # first simple use of LemonTree.Automation
       - name: ConsistencyCheck
         run: |
-          &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+          &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model "model.eapx"
 
 Simple Example Workflow: https://github.com/LieberLieber/setup-LemonTree.Automation/actions/workflows/TestGetLemonTreeAutomationAction.yml<br />
 Many more Workflow Examples: https://github.com/LieberLieber/LemonTree.Automation.Workflows/<br />
