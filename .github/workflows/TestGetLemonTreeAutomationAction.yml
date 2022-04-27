@@ -24,13 +24,15 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-
+      #Install LieberLieber LemonTree.Automation on the Action-Runner and prepare the license
+      #the secrets.LTALICENSE contains the text from the License File provided
       - name: GetLTA
-        uses: LieberLieber/setup-LemonTree.Automation@v0.1
+        uses: LieberLieber/setup-LemonTree.Automation@v0.2
         id: GetLTA
         with:
           License: ${{secrets.LTALICENSE}}
-
+      
+      #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
       - name: ConsistencyCheck
         run: |
           &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
