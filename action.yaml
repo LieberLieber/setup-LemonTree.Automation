@@ -1,6 +1,6 @@
 # action.yaml
-name: 'Get LemontTreeAutomation'
-description: 'Call an API and get the result'
+name: 'Get LemonTreeAutomation'
+description: 'An Action to download LieberLieber LemonTree.Automation with Sparx Systems Enterprise Architect on a build runner! To claim a trial license or buy one contact welcome@lieberlieber.com'
 inputs:
   LemonTreePackageURL:
     description: 'the url for deployment'
