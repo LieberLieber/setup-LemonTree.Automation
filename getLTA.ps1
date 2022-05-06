@@ -18,5 +18,6 @@ IF([string]::IsNullOrWhiteSpace($License)) {
     echo "Create License File from provided info"
     $License | Out-File -FilePath lta.lic #if you deploy the license on the fly
 }  
-".\LTA\LemonTree.Automation.exe" Version
+$version = .\LTA\LemonTree.Automation.exe Version
+echo "$version"
 echo '::set-output name=LemonTreeAutomationExecutable::.\LTA\LemonTree.Automation.exe'
