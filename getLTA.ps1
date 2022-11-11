@@ -12,12 +12,19 @@ while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding 
 curl "$LemonTreePackageURL" --output LTA.zip -k
 Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
 
-IF([string]::IsNullOrWhiteSpace($License)) {            
+IF([string]::IsNullOrWhiteSpace($License)) 
+{            
     echo "No License info provided."         
-} else {            
+} 
+else 
+{            
     echo "Create License File from provided info"
     $License | Out-File -FilePath lta.lic #if you deploy the license on the fly
 }  
+
+echo "Last Exitcode $LASTEXITCODE"
+
 $version = .\LTA\LemonTree.Automation.exe Version
 echo "$version"
 echo '::set-output name=LemonTreeAutomationExecutable::.\LTA\LemonTree.Automation.exe'
+echo "Last Exitcode $LASTEXITCODE"
