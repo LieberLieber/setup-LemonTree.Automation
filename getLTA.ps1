@@ -22,9 +22,11 @@ else
     $License | Out-File -FilePath lta.lic #if you deploy the license on the fly
 }  
 
-echo "Last Exitcode $LASTEXITCODE"
-
-$version = .\LTA\LemonTree.Automation.exe Version
-echo "$version"
-echo '::set-output name=LemonTreeAutomationExecutable::.\LTA\LemonTree.Automation.exe'
-echo "Last Exitcode $LASTEXITCODE"
+if($LASTEXITCODE -eq 0)
+{
+    $version = .\LTA\LemonTree.Automation.exe Version
+    echo "LieberLieber LemonTree.Automation Version: $version is ready."
+    echo 'LemonTreeAutomationExecutable=.\LTA\LemonTree.Automation.exe' >> $env:GITHUB_OUTPUT
+    #workaround because LemonTree.Automation.exe Version provides misleading Exitcode
+    exit 0
+}
