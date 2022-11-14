@@ -35,7 +35,7 @@ jobs:
       #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
       - name: ConsistencyCheck
         run: |
-          &".\LTA\LemonTree.Automation" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+         dotnet ./LTA/LemonTree.Automation.exe ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
  
      
     
