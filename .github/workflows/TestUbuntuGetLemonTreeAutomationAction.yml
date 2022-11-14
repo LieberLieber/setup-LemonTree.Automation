@@ -3,21 +3,21 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-name: Test>GetLemonTreeAutomation
+name: Ubuntu Action Test
 
 on:
  push:
 
 env:
-  ModelName: DemoModel
-  ModelExtension: eapx
+  ModelName: model
+  ModelExtension: qeax
 
 jobs:
   ConsistencyCheck:
     defaults:
       run:
         shell: pwsh
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
       #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
       - name: ConsistencyCheck
         run: |
-          &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+          &".\LTA\LemonTree.Automation" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
  
      
     
