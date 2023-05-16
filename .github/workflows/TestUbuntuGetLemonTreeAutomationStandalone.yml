@@ -1,0 +1,44 @@
+# Copyright (c) LieberLieber Software GmbH
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+name: Ubuntu Standalone Test
+
+on:
+ push:
+
+env:
+  ModelName: model
+  ModelExtension: qeax
+
+jobs:
+  ConsistencyCheck:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+          fetch-depth: 0
+      
+      #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
+      - name: ConsistencyCheck
+        run: |
+        
+            echo "Download LemonTree.Automtion from Repo"
+            while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
+            curl "https://customers.lieberlieber.com/Downloads/LemonTree/Automation/LemonTree.Automation.Linux.Zip_3.3.7.zip" --output LTA.zip -k
+            Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
+
+            $license = '${{secrets.LTALICENSE}}'
+            echo "Create License File from provided info"
+            $license | Out-File -FilePath lta.lic #if you deploy the license on the fly
+
+            dotnet ./LTA/LemonTree.Automation.dll ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+ 
+     
+    
