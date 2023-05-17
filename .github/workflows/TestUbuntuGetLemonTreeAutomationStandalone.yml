@@ -39,6 +39,7 @@ jobs:
             $license | Out-File -FilePath lta.lic #if you deploy the license on the fly
 
             dotnet ./LTA/LemonTree.Automation.dll ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+            
  
      
     
