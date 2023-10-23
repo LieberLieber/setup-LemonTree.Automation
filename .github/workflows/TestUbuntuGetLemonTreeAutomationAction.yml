@@ -3,7 +3,7 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-name: Ubuntu Action Test
+name: Ubuntu  Test
 
 on:
  push:
@@ -24,28 +24,14 @@ jobs:
         with:
           lfs: true
           fetch-depth: 0
-      #Install LieberLieber LemonTree.Automation on the Action-Runner and prepare the license
-      #the secrets.LTALICENSE contains the text from the License File provided
-      # - name: GetLTA
-      #   uses: LieberLieber/setup-LemonTree.Automation@v1
-      #   id: GetLTA
-      #   with:
-      #     License: ${{secrets.LTALICENSE}}
       
+
+      - name: GetLTA
+        uses: ./
+        id: GetLTA
+        with:
+          License: ${{secrets.LTALICENSE}}
       #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
       - name: ConsistencyCheck
         run: |
-        
-            echo "Download LemonTree.Automtion from Repo"
-            while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
-            curl "https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Linux.Zip_3.4.2-lee-3129-lta-lin0029.zip" --output LTA.zip -k
-            Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
-
-            $license = '${{secrets.LTALICENSE}}'
-            echo "Create License File from provided info"
-            $license | Out-File -FilePath lta.lic #if you deploy the license on the fly
-
-            dotnet ./LTA/LemonTree.Automation.dll ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
- 
-     
-    
+            &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
