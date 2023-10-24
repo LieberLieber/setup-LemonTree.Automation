@@ -1,0 +1,41 @@
+# Copyright (c) LieberLieber Software GmbH
+# This Source Code Form is subject to the terms of the Mozilla Public
+# License, v. 2.0. If a copy of the MPL was not distributed with this
+# file, You can obtain one at https://mozilla.org/MPL/2.0/.
+
+name: Windows Test 
+
+on:
+ push:
+
+env:
+  ModelName: DemoModel
+  ModelExtension: eapx
+
+jobs:
+  ConsistencyCheck:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: windows-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          lfs: true
+          fetch-depth: 0
+      #Install LieberLieber LemonTree.Automation on the Action-Runner and prepare the license
+      #the secrets.LTALICENSE contains the text from the License File provided
+      - name: GetLTA
+        uses: ./
+        id: GetLTA
+        with:
+          License: ${{secrets.LTALICENSE}}
+      
+      #Consitentcy Check is the most easy LemonTree.Automation operation for more advanced uses including diff and merge look at https://github.com/LieberLieber/LemonTree.Automation.Workflows
+      - name: ConsistencyCheck
+        run: |
+          &"${{steps.GetLTA.outputs.LemonTreeAutomationExecutable}}" ConsistencyCheck --Model ${{env.ModelName}}.${{env.ModelExtension}}
+ 
+     
+    
