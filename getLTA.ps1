@@ -23,8 +23,8 @@ else
 Write-Output "Download LemonTree.Automtion from Repo"
 # while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
 # curl "$LemonTreePackageURL" --output LTA.zip -k
-# Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
-wget -O "LTA.zip" "$LemonTreePackageURL"
+#Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
+&./wget -O "LTA.zip" "$LemonTreePackageURL"
 Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
 
 
