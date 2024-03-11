@@ -23,11 +23,12 @@ else
 Write-Output "Download LemonTree.Automtion from Repo"
 # while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
 # curl "$LemonTreePackageURL" --output LTA.zip -k
-Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
+# Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
+wget -O "LTA.zip" "$LemonTreePackageURL"
 Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
 
 
-IF([string]::IsNullOrWhiteSpace($License)) 
+if([string]::IsNullOrWhiteSpace($License)) 
 {            
     Write-Output "No License info provided."         
 } 
@@ -47,6 +48,9 @@ elseif ($RunnerOs -eq 'Windows')
 {
     $LemonTreeExe  = ".\LTA\LemonTree.Automation.exe"
 }
+
+#Just to be sure if the executeable is not available - let's throw exitcode 1
+
 
 Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
 
