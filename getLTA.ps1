@@ -12,7 +12,9 @@ if ($RunnerOs -eq 'Linux')
 }
 elseif ($RunnerOs -eq 'Windows') 
 {
-    $LemonTreePackageURL  = "https://customers.lieberlieber.com/Downloads/LemonTree/Automation/LemonTree.Automation.Windows.Zip_4.0.3.zip"
+    # somehow nexus is super slow on windows-latest
+    # $LemonTreePackageURL  = "https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Windows.Zip_latest.zip"
+    $LemonTreePackageURL  = "https://www.lieberlieber.com/lemontree/automation/latest"
 }
 else 
 {
