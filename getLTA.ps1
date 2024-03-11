@@ -23,8 +23,11 @@ else
 Write-Output "Download LemonTree.Automtion from Repo"
 # while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
 # curl "$LemonTreePackageURL" --output LTA.zip -k
-Invoke-WebRequest -URI $LemonTreePackageURL -OutFile LTA.zip
-Expand-Archive LTA.zip -DestinationPath .\LTA\ -Force
+Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
+Write-Output "Download Exit Code: $LASTEXITCODE"
+
+Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
+Write-Output "Unzip Exit Code: $LASTEXITCODE"
 
 IF([string]::IsNullOrWhiteSpace($License)) 
 {            
@@ -51,6 +54,6 @@ if($LASTEXITCODE -eq 0)
     }
 
     Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
-    #workaround because LemonTree.Automation.exe Version provides misleading Exitcode
+   
     exit 0
 }
