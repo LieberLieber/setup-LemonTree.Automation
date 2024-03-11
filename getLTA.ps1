@@ -24,10 +24,8 @@ Write-Output "Download LemonTree.Automtion from Repo"
 # while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
 # curl "$LemonTreePackageURL" --output LTA.zip -k
 Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
-Write-Output "Download Exit Code: $LASTEXITCODE"
-
 Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
-Write-Output "Unzip Exit Code: $LASTEXITCODE"
+
 
 IF([string]::IsNullOrWhiteSpace($License)) 
 {            
@@ -39,21 +37,17 @@ else
     $License | Out-File -FilePath lta.lic #if you deploy the license on the fly
 }  
 
-if($LASTEXITCODE -eq 0)
+if ($RunnerOs -eq 'Linux') 
 {
-
-    if ($RunnerOs -eq 'Linux') 
-    {
-        $LemonTreeExe = "./LTA/LemonTree.Automation"
-        #workaround because github artifacts logic doesn't maintain properties
-        chmod +x $LemonTreeExe            
-    }
-    elseif ($RunnerOs -eq 'Windows') 
-    {
-        $LemonTreeExe  = ".\LTA\LemonTree.Automation.exe"
-    }
-
-    Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
-   
-    exit 0
+    $LemonTreeExe = "./LTA/LemonTree.Automation"
+    #workaround because github artifacts logic doesn't maintain properties
+    chmod +x $LemonTreeExe            
 }
+elseif ($RunnerOs -eq 'Windows') 
+{
+    $LemonTreeExe  = ".\LTA\LemonTree.Automation.exe"
+}
+
+Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
+
+exit 0
