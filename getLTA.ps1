@@ -12,7 +12,7 @@ if ($RunnerOs -eq 'Linux')
 }
 elseif ($RunnerOs -eq 'Windows') 
 {
-    $LemonTreePackageURL  = "https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Windows.Zip_latest.zip"
+    $LemonTreePackageURL  = "https://customers.lieberlieber.com/Downloads/LemonTree/Automation/LemonTree.Automation.Windows.Zip_4.0.3.zip"
 }
 else 
 {
@@ -23,8 +23,7 @@ else
 Write-Output "Download LemonTree.Automtion from Repo"
 # while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
 # curl "$LemonTreePackageURL" --output LTA.zip -k
-#Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
-&./wget -O "LTA.zip" "$LemonTreePackageURL"
+Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
 Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
 
 
