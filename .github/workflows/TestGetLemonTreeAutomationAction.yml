@@ -17,7 +17,7 @@ jobs:
             fetch-depth: 0
 
         - name: GetLTA
-          uses: LieberLieber/setup-LemonTree.Automation@v5
+          uses: LieberLieber/setup-LemonTree.Automation@v6
           id: GetLTA
           with:
            License: ${{secrets.LTALICENSE}} 

@@ -23,8 +23,7 @@ else
 }
 
 Write-Output "Download LemonTree.Automtion from Repo"
-# while (Test-Path Alias:curl) {Remove-Item Alias:curl} #remove the alias binding from curl to Invoke-WebRequest
-# curl "$LemonTreePackageURL" --output LTA.zip -k
+
 Invoke-WebRequest -URI "$LemonTreePackageURL" -OutFile "LTA.zip"
 Expand-Archive "LTA.zip" -DestinationPath ".\LTA\" -Force
 
@@ -41,7 +40,7 @@ else
 
 if ($RunnerOs -eq 'Linux') 
 {
-    $LemonTreeExe = "./LTA/LemonTree.Automation"
+    $LemonTreeExe = "./LTA/lemontree.automation"
     #workaround because github artifacts logic doesn't maintain properties
     chmod +x $LemonTreeExe            
 }
@@ -50,9 +49,17 @@ elseif ($RunnerOs -eq 'Windows')
     $LemonTreeExe  = ".\LTA\LemonTree.Automation.exe"
 }
 
-#Just to be sure if the executeable is not available - let's throw exitcode 1
+if (Test-Path -path $LemonTreeExe)
+{
+    #Just to be sure if the executeable is not available - let's throw exitcode 1
 
+    Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
 
-Write-Output "LemonTreeAutomationExecutable=$LemonTreeExe" >> $env:GITHUB_OUTPUT
-
-exit 0
+    exit 0
+}
+else 
+{
+   Write-Output "Executable not found LemonTreeAutomationExecutable=$LemonTreeExe"
+    
+   exit 1
+}
