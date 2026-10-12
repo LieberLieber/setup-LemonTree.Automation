@@ -8,12 +8,12 @@ param(
 
 if ($RunnerOs -eq 'Linux') 
 {
-    $LemonTreePackageURL = "https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Linux.Zip_latest.zip"
+    $LemonTreePackageURL = "https://lieberlieber.nexus/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Linux.Zip_latest.zip"
 }
 elseif ($RunnerOs -eq 'Windows') 
 {
     # somehow nexus is super slow on windows-latest
-    # $LemonTreePackageURL  = "https://nexus.lieberlieber.com/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Windows.Zip_latest.zip"
+    # $LemonTreePackageURL  = "https://lieberlieber.nexus/repository/lemontree-release/LemonTree.Automation/LemonTree.Automation.Windows.Zip_latest.zip"
     $LemonTreePackageURL  = "https://www.lieberlieber.com/lemontree/automation/latest"
 }
 else 
